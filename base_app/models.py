@@ -135,6 +135,8 @@ class qualification(models.Model):
 
 class project(models.Model):
     user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING, related_name='projectuser',null=True,blank=True)
+    designation = models.ForeignKey(designation, on_delete=models.DO_NOTHING, related_name='projectdesignation',null=True,blank=True)
+    department = models.ForeignKey(department, on_delete=models.DO_NOTHING, related_name='projectdepartment',null=True,blank=True)
     project = models.CharField(max_length=100 ,  null=True, blank=True)
     description = models.CharField(max_length=100 ,  null=True, blank=True)
     startdate=models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
