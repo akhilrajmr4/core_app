@@ -172,10 +172,7 @@ class project_taskassign(models.Model):
     startdate = models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
     enddate = models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
     files=models.FileField(upload_to = 'images/', default='')
-    department = models.CharField(max_length=200)#******************************************************************************
-    designation = models.CharField(max_length=200)
-    employee = models.CharField(max_length=200)
-    tester = models.CharField(max_length=200)
+    tester = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING, related_name='project_taskassign_tester',null=True,blank=True)
     extension = models.IntegerField()
     reason = models.TextField()
     extension_status = models.CharField(max_length=200)
