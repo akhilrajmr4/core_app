@@ -271,8 +271,7 @@ class internship(models.Model):
 
 
 class trainer_task(models.Model):
-    trainee = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING, related_name='trainer_tasktrainee',null=True,blank=True)
-    trainer = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING, related_name='trainer_tasktrainer',null=True,blank=True)
+    user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING, related_name='trainer_tasktrainee',null=True,blank=True)
     taskname =  models.CharField(max_length=240)
     startdate= models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
     enddate=models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
