@@ -70,8 +70,8 @@ class user_registration(models.Model):
     alternativeno = models.CharField(max_length=240, null=True)
     email = models.EmailField(max_length=240, null=True)
     password = models.CharField(max_length=240, null=True)
-    idproof = models.FileField(upload_to = 'images/', default='')
-    photo = models.FileField(upload_to = 'images/', default='')
+    idproof = models.FileField(upload_to = 'images/', null=True, blank=True)
+    photo = models.FileField(upload_to = 'images/', null=True, blank=True)
     designation = models.ForeignKey(designation, on_delete=models.DO_NOTHING, related_name='userregistrationdesignation',null=True,blank=True)
     department =models.ForeignKey(department, on_delete=models.DO_NOTHING, related_name='userregistrationdepartment',null=True,blank=True)
     branch = models.ForeignKey(branch_registration, on_delete=models.DO_NOTHING, related_name='userregistrationbranch',null=True,blank=True)
@@ -92,10 +92,10 @@ class extracurricular(models.Model):
     user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING, related_name='extracurricularuser',null=True,blank=True)
     internshipdetails = models.CharField(max_length=240,null=True)
     internshipduration = models.CharField(max_length=240,null=True)
-    internshipcertificate = models.FileField(upload_to = 'images/', default='')
+    internshipcertificate = models.FileField(upload_to = 'images/', null=True, blank=True)
     onlinetrainingdetails = models.CharField(max_length=240,null=True)
     onlinetrainingduration = models.CharField(max_length=240,null=True)
-    onlinetrainingcertificate= models.FileField(upload_to = 'images/', default='')
+    onlinetrainingcertificate= models.FileField(upload_to = 'images/', null=True, blank=True)
     projecttitle = models.CharField(max_length=240,null=True)
     projectduration = models.CharField(max_length=240,null=True)
     projectdescription = models.TextField(null=True)
@@ -114,13 +114,13 @@ class qualification(models.Model):
     user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING, related_name='qualificationuser',null=True,blank=True)
     plustwo = models.CharField(max_length=240,null=True)
     schoolaggregate = models.CharField(max_length=240,null=True)
-    schoolcertificate = models.FileField(upload_to = 'images/', default='')
+    schoolcertificate = models.FileField(upload_to = 'images/', null=True, blank=True)
     ugdegree = models.CharField(max_length=240,null=True)
     ugstream = models.CharField(max_length=240,null=True)
     ugpassoutyr = models.CharField(max_length=240,null=True)
     ugaggregrate = models.CharField(max_length=240,null=True)
     backlogs= models.CharField(max_length=240,null=True)
-    ugcertificate = models.FileField(upload_to = 'images/', default='')
+    ugcertificate = models.FileField(upload_to = 'images/', null=True, blank=True)
     pg= models.CharField(max_length=240,null=True)
     status = models.CharField(max_length=100,default='')
 
@@ -135,14 +135,14 @@ class qualification(models.Model):
 
 class project(models.Model):
     user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING, related_name='projectuser',null=True,blank=True)
-    project = models.CharField(max_length=100)
-    description = models.CharField(max_length=100)
+    project = models.CharField(max_length=100 ,  null=True, blank=True)
+    description = models.CharField(max_length=100 ,  null=True, blank=True)
     startdate=models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
     enddate=models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
-    files=models.FileField(upload_to = 'images/', default='')
+    files=models.FileField(upload_to = 'images/', null=True, blank=True)
     progress = models.CharField(max_length=100)
-    user_reason = models.CharField(max_length=100)
-    status=models.CharField(max_length=100)
+    user_reason = models.CharField(max_length=100, null=True, blank=True)
+    status=models.CharField(max_length=100, null=True, blank=True)
     
 
     def __str__(self):
@@ -156,7 +156,7 @@ class test_status(models.Model):
     taskname = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING, related_name='test_statustaskname',null=True,blank=True)
     date=models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
     workdone = models.TextField(null=True)
-    files=models.FileField(upload_to = 'images/', default='')
+    files=models.FileField(upload_to = 'images/', null=True, blank=True)
 
 
     def __str__(self):
@@ -170,14 +170,14 @@ class project_taskassign(models.Model):
     description = models.TextField()
     startdate = models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
     enddate = models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
-    files=models.FileField(upload_to = 'images/', default='')
+    files=models.FileField(upload_to = 'images/', null=True, blank=True)
     tester = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING, related_name='project_taskassign_tester',null=True,blank=True)
     extension = models.IntegerField()
     reason = models.TextField(null=True, blank=True)
     extension_status = models.CharField(max_length=200, null=True, blank=True)
     tl_description = models.CharField(max_length=200, null=True, blank=True)
     submitted_date= models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
-    employee_files = models.FileField(upload_to = 'images/', default='')
+    employee_files = models.FileField(upload_to = 'images/', null=True, blank=True)
     employee_description = models.TextField(null=True, blank=True)
     status = models.CharField(max_length=200, null=True, blank=True)
 
@@ -188,15 +188,15 @@ class project_taskassign(models.Model):
 
 class tester_status(models.Model):
     tester = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING, related_name='tester_statustester',null=True,blank=True)
-    project =models.ForeignKey(project, on_delete=models.DO_NOTHING, related_name='tester_statusproject',null=True,blank=True)
+    project =models.ForeignKey(project, on_delete=models.DO_NOTHING, related_name='tester_statusproject', null=True,blank=True)
     task = models.ForeignKey(project_taskassign, on_delete=models.DO_NOTHING, related_name='tester_statustask',null=True,blank=True)
     user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING, related_name='tester_statususer',null=True,blank=True)
     date= models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
-    workdone = models.TextField()
-    files=models.FileField(upload_to = 'images/', default='')
-    subtask = models.TextField()
+    workdone = models.TextField(max_length=200, null=True, blank=True)
+    files=models.FileField(upload_to = 'images/', null=True, blank=True)
+    subtask = models.TextField(max_length=200, null=True, blank=True)
     progress = models.IntegerField()
-    status = models.CharField(max_length=200)
+    status = models.CharField(max_length=200, null=True, blank=True)
 
 
     def __str__(self):
@@ -253,8 +253,8 @@ class internship(models.Model):
     mobile = models.CharField(max_length=200)
     alternative_no = models.CharField(max_length=200)
     email = models.EmailField()
-    profile_pic= models.ImageField(upload_to = 'images/', null=True)
-    attach_file= models.FileField(upload_to = 'images/', default="")  
+    profile_pic= models.ImageField(upload_to = 'images/', null=True, blank=True)
+    attach_file= models.FileField(upload_to = 'images/', null=True, blank=True)  
     rating = models.CharField(max_length=200)  
     hrmanager = models.CharField(max_length=200)
     guide = models.CharField(max_length=200)
@@ -269,14 +269,14 @@ class internship(models.Model):
 
 
 class trainer_task(models.Model):
-    user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING, related_name='trainer_tasktrainee',null=True,blank=True)
+    user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING, related_name='trainer_task_trainee',null=True,blank=True)
     taskname =  models.CharField(max_length=240)
     startdate= models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
     enddate=models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
-    files=models.FileField(upload_to = 'images/', default='')
-    description = models.TextField()
-    user_description = models.TextField()
-    user_files = models.FileField(upload_to = 'images/', default='')
+    files=models.FileField(upload_to = 'images/', null=True, blank=True)
+    description = models.TextField(max_length=240)
+    user_description = models.TextField(max_length=240)
+    user_files = models.FileField(upload_to = 'images/', null=True, blank=True)
     status =  models.CharField(max_length=200)  
 
 
@@ -290,7 +290,7 @@ class topic(models.Model):
     topic = models.CharField(max_length=240)
     startdate= models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
     enddate= models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
-    files=models.FileField(upload_to = 'images/', default='')
+    files=models.FileField(upload_to = 'images/', null=True, blank=True)
     description = models.TextField()
     review = models.TextField()
     status =  models.CharField(max_length=200)
