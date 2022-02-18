@@ -277,8 +277,8 @@ class trainer_task(models.Model):
     enddate=models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
     files=models.FileField(upload_to='', default='')
     description = models.TextField()
-    trainee_description = models.TextField()
-    trainee_files = models.FileField(upload_to='', default='')
+    user_description = models.TextField()
+    user_files = models.FileField(upload_to='', default='')
     status =  models.CharField(max_length=200)  
 
 
