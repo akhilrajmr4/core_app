@@ -140,6 +140,8 @@ class project(models.Model):
     startdate=models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
     enddate=models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
     files=models.FileField(upload_to='', default='')
+    progress = models.CharField(max_length=100)
+    user_reason = models.CharField(max_length=100)
     status=models.CharField(max_length=100)
     
 
